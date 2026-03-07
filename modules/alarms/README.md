@@ -16,8 +16,6 @@ Production-ready AWS CloudWatch Alarms module for monitoring metrics and trigger
 - **Missing Data Handling**: Configurable behavior for missing data points
 - **Consistent Naming**: Integration with metadata module for standardized resource naming
 
-
-
 ## Security
 
 ### Environment-Based Security Controls
@@ -30,10 +28,8 @@ Security controls are automatically applied based on the environment through the
 | SNS notifications | Optional | Recommended | Required |
 | Evaluation periods | Relaxed | Standard | Strict |
 
-For full details on security profiles and how controls vary by environment, see the <a href="https://github.com/islamelkadi/terraform-aws-metadata?tab=readme-ov-file#security-profiles" target="_blank">Security Profiles</a> documentation.
-## Security
+For full details on security profiles and how controls vary by environment, see the [Security Profiles](https://github.com/islamelkadi/terraform-aws-metadata?tab=readme-ov-file#security-profiles) documentation.
 
-#
 ## Usage Example
 
 ```hcl
@@ -67,9 +63,7 @@ module "lambda_errors_alarm" {
 }
 ```
 
-
 <!-- BEGIN_TF_DOCS -->
-
 
 ## Usage
 

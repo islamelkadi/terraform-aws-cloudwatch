@@ -4,13 +4,25 @@ Production-ready AWS CloudWatch Logs module with comprehensive security controls
 
 ## Table of Contents
 
-- [Security Controls](#security-controls)
+- [Security](#security)
 - [Features](#features)
 - [Usage Examples](#usage-examples)
 - [Requirements](#requirements)
 - [Examples](#examples)
 
-## Security Controls
+## Features
+
+- **KMS Encryption**: Customer-managed key encryption for log data at rest
+- **Configurable Retention**: Support for all CloudWatch Logs retention periods (1 day to 10 years)
+- **Log Stream Management**: Automatic creation of log streams within log groups
+- **Custom Naming**: Support for AWS service-specific naming requirements
+- **Flexible Configuration**: Override generated names for service integrations
+- **Consistent Naming**: Integration with metadata module for standardized resource naming
+- **Zero Retention**: Support for never-expiring logs (retention = 0)
+
+## Security
+
+### Security Controls
 
 This module implements security controls based on the metadata module's security policy. Controls can be selectively overridden with documented business justification.
 
@@ -43,16 +55,17 @@ security_control_overrides = {
 4. **Audit Trail**: All overrides require `justification` field for compliance
 5. **Review Cycle**: Quarterly review of all active overrides
 
-## Features
+### Environment-Based Security Controls
 
-- **KMS Encryption**: Customer-managed key encryption for log data at rest
-- **Configurable Retention**: Support for all CloudWatch Logs retention periods (1 day to 10 years)
-- **Log Stream Management**: Automatic creation of log streams within log groups
-- **Custom Naming**: Support for AWS service-specific naming requirements
-- **Flexible Configuration**: Override generated names for service integrations
-- **Consistent Naming**: Integration with metadata module for standardized resource naming
-- **Zero Retention**: Support for never-expiring logs (retention = 0)
+Security controls are automatically applied based on the environment through the [terraform-aws-metadata](https://github.com/islamelkadi/terraform-aws-metadata?tab=readme-ov-file#security-profiles) module's security profiles:
 
+| Control | Dev | Staging | Prod |
+|---------|-----|---------|------|
+| KMS encryption for logs | Optional | Required | Required |
+| Log retention | 7 days | 90 days | 365 days |
+| Log stream management | Optional | Recommended | Required |
+
+For full details on security profiles and how controls vary by environment, see the [Security Profiles](https://github.com/islamelkadi/terraform-aws-metadata?tab=readme-ov-file#security-profiles) documentation.
 ## Usage Examples
 
 ### Example 1: Basic Log Group with Security Controls
@@ -179,20 +192,7 @@ module "dev_logs" {
 }
 ```
 
-## Environment-Based Security Controls
-
-Security controls are automatically applied based on the environment through the [terraform-aws-metadata](https://github.com/islamelkadi/terraform-aws-metadata?tab=readme-ov-file#security-profiles){:target="_blank"} module's security profiles:
-
-| Control | Dev | Staging | Prod |
-|---------|-----|---------|------|
-| KMS encryption for logs | Optional | Required | Required |
-| Log retention | 7 days | 90 days | 365 days |
-| Log stream management | Optional | Recommended | Required |
-
-For full details on security profiles and how controls vary by environment, see the <a href="https://github.com/islamelkadi/terraform-aws-metadata?tab=readme-ov-file#security-profiles" target="_blank">Security Profiles</a> documentation.
-
 <!-- BEGIN_TF_DOCS -->
-
 
 ## Usage
 
@@ -268,15 +268,6 @@ module "lambda_logs" {
 | <a name="output_log_group_name"></a> [log\_group\_name](#output\_log\_group\_name) | Name of the CloudWatch Log Group |
 | <a name="output_log_stream_names"></a> [log\_stream\_names](#output\_log\_stream\_names) | Names of the created log streams |
 | <a name="output_tags"></a> [tags](#output\_tags) | Tags applied to the log group |
-
-## Example
-
-See [example/](example/) for a complete working example with all features.
-
-## License
-
-MIT Licensed. See [LICENSE](LICENSE) for full details.
-<!-- END_TF_DOCS -->
 
 ## Examples
 
