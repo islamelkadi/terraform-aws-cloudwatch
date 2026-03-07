@@ -17,58 +17,10 @@ make bootstrap
 
 This will install/upgrade: tfenv, Terraform (via tfenv), tflint, terraform-docs, checkov, and pre-commit.
 
-## Submodules
 
-| Submodule | Description |
-|-----------|-------------|
-| [alarms](modules/alarms/) | CloudWatch metric alarms with SNS notifications |
-| [logs](modules/logs/) | CloudWatch Log Groups with KMS encryption and retention |
+## Security
 
-## Usage
-
-```hcl
-module "lambda_errors" {
-  source = "path/to/terraform-aws-cloudwatch/modules/alarms"
-
-  namespace   = "example"
-  environment = "prod"
-  name        = "lambda-errors"
-  region      = "us-east-1"
-
-  alarm_description   = "Alert when Lambda errors exceed threshold"
-  comparison_operator = "GreaterThanThreshold"
-  evaluation_periods  = 2
-  metric_name         = "Errors"
-  namespace_metric    = "AWS/Lambda"
-  period              = 300
-  statistic           = "Sum"
-  threshold           = 10
-
-  dimensions = {
-    FunctionName = "my-function"
-  }
-
-  alarm_actions = [var.sns_topic_arn]
-  tags          = var.tags
-}
-
-module "lambda_logs" {
-  source = "path/to/terraform-aws-cloudwatch/modules/logs"
-
-  namespace   = "example"
-  environment = "prod"
-  name        = "event-normalizer"
-  region      = "us-east-1"
-
-  log_group_name_override = "/aws/lambda/ws-prod-event-normalizer"
-  retention_in_days       = 365
-  kms_key_id              = var.kms_key_arn
-
-  tags = var.tags
-}
-```
-
-## Security Controls
+### Security Controls
 
 Implements controls for FSBP, CIS, NIST 800-53/171, and PCI DSS v4.0:
 
@@ -77,6 +29,26 @@ Implements controls for FSBP, CIS, NIST 800-53/171, and PCI DSS v4.0:
 - Metric alarms for critical events
 - SNS integration for notifications
 - Security control overrides with audit justification
+
+### Environment-Based Security Controls
+
+Security controls are automatically applied based on the environment through the [terraform-aws-metadata](https://github.com/islamelkadi/terraform-aws-metadata?tab=readme-ov-file#security-profiles){:target="_blank"} module's security profiles:
+
+| Control | Dev | Staging | Prod |
+|---------|-----|---------|------|
+| KMS encryption for logs | Optional | Required | Required |
+| Log retention | 7 days | 90 days | 365 days |
+| Metric alarms | Optional | Recommended | Required |
+| SNS notifications | Optional | Recommended | Required |
+
+For full details on security profiles and how controls vary by environment, see the <a href="https://github.com/islamelkadi/terraform-aws-metadata?tab=readme-ov-file#security-profiles" target="_blank">Security Profiles</a> documentation.
+## Submodules
+
+| Submodule | Description |
+|-----------|-------------|
+| [alarms](modules/alarms/) | CloudWatch metric alarms with SNS notifications |
+| [logs](modules/logs/) | CloudWatch Log Groups with KMS encryption and retention |
+
 
 ## Module Structure
 
@@ -107,18 +79,6 @@ terraform-aws-cloudwatch/
 | terraform | >= 1.14.3 |
 | aws | >= 6.34 |
 
-## Environment-Based Security Controls
-
-Security controls are automatically applied based on the environment through the [terraform-aws-metadata](https://github.com/islamelkadi/terraform-aws-metadata?tab=readme-ov-file#security-profiles){:target="_blank"} module's security profiles:
-
-| Control | Dev | Staging | Prod |
-|---------|-----|---------|------|
-| KMS encryption for logs | Optional | Required | Required |
-| Log retention | 7 days | 90 days | 365 days |
-| Metric alarms | Optional | Recommended | Required |
-| SNS notifications | Optional | Recommended | Required |
-
-For full details on security profiles and how controls vary by environment, see the <a href="https://github.com/islamelkadi/terraform-aws-metadata?tab=readme-ov-file#security-profiles" target="_blank">Security Profiles</a> documentation.
 
 ## MCP Servers
 
