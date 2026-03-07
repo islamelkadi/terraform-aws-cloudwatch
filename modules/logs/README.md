@@ -200,7 +200,7 @@ module "dev_logs" {
 # Basic CloudWatch Logs Example
 
 module "lambda_logs" {
-  source = "../"
+  source = "github.com/islamelkadi/terraform-aws-cloudwatch//modules/logs"
 
   namespace   = var.namespace
   environment = var.environment

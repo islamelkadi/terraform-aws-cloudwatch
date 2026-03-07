@@ -71,7 +71,7 @@ module "lambda_errors_alarm" {
 # Basic CloudWatch Alarm Example
 
 module "lambda_errors" {
-  source = "../"
+  source = "github.com/islamelkadi/terraform-aws-cloudwatch//modules/alarms"
 
   namespace   = var.namespace
   environment = var.environment
