@@ -118,7 +118,3 @@ No inputs.
 
 No outputs.
 
-## License
-
-MIT Licensed. See [LICENSE](LICENSE) for full details.
-<!-- END_TF_DOCS -->
