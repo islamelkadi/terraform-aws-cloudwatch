@@ -16,6 +16,24 @@ Production-ready AWS CloudWatch Alarms module for monitoring metrics and trigger
 - **Missing Data Handling**: Configurable behavior for missing data points
 - **Consistent Naming**: Integration with metadata module for standardized resource naming
 
+
+
+## Security
+
+### Environment-Based Security Controls
+
+Security controls are automatically applied based on the environment through the [terraform-aws-metadata](https://github.com/islamelkadi/terraform-aws-metadata?tab=readme-ov-file#security-profiles) module's security profiles:
+
+| Control | Dev | Staging | Prod |
+|---------|-----|---------|------|
+| Metric alarms | Optional | Recommended | Required |
+| SNS notifications | Optional | Recommended | Required |
+| Evaluation periods | Relaxed | Standard | Strict |
+
+For full details on security profiles and how controls vary by environment, see the <a href="https://github.com/islamelkadi/terraform-aws-metadata?tab=readme-ov-file#security-profiles" target="_blank">Security Profiles</a> documentation.
+## Security
+
+#
 ## Usage Example
 
 ```hcl
@@ -49,17 +67,6 @@ module "lambda_errors_alarm" {
 }
 ```
 
-## Environment-Based Security Controls
-
-Security controls are automatically applied based on the environment through the [terraform-aws-metadata](https://github.com/islamelkadi/terraform-aws-metadata?tab=readme-ov-file#security-profiles){:target="_blank"} module's security profiles:
-
-| Control | Dev | Staging | Prod |
-|---------|-----|---------|------|
-| Metric alarms | Optional | Recommended | Required |
-| SNS notifications | Optional | Recommended | Required |
-| Evaluation periods | Relaxed | Standard | Strict |
-
-For full details on security profiles and how controls vary by environment, see the <a href="https://github.com/islamelkadi/terraform-aws-metadata?tab=readme-ov-file#security-profiles" target="_blank">Security Profiles</a> documentation.
 
 <!-- BEGIN_TF_DOCS -->
 
@@ -165,10 +172,4 @@ module "lambda_errors" {
 ## Example
 
 See [example/](example/) for a complete working example with all features.
-
-## License
-
-MIT Licensed. See [LICENSE](LICENSE) for full details.
-<!-- END_TF_DOCS -->
-
 
