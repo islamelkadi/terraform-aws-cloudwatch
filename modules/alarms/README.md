@@ -65,13 +65,14 @@ module "lambda_errors_alarm" {
 
 <!-- BEGIN_TF_DOCS -->
 
+
 ## Usage
 
 ```hcl
 # Basic CloudWatch Alarm Example
 
 module "lambda_errors" {
-  source = "github.com/islamelkadi/terraform-aws-cloudwatch//modules/alarms"
+  source = "../"
 
   namespace   = var.namespace
   environment = var.environment
@@ -118,7 +119,7 @@ module "lambda_errors" {
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_metadata"></a> [metadata](#module\_metadata) | github.com/islamelkadi/terraform-aws-metadata | v1.1.0 |
+| <a name="module_metadata"></a> [metadata](#module\_metadata) | github.com/islamelkadi/terraform-aws-metadata | v1.0.0 |
 
 ## Resources
 
@@ -132,10 +133,8 @@ module "lambda_errors" {
 |------|-------------|------|---------|:--------:|
 | <a name="input_alarm_actions"></a> [alarm\_actions](#input\_alarm\_actions) | List of ARNs to notify when alarm transitions to ALARM state | `list(string)` | `[]` | no |
 | <a name="input_alarm_description"></a> [alarm\_description](#input\_alarm\_description) | Description of the alarm | `string` | `""` | no |
-| <a name="input_attributes"></a> [attributes](#input\_attributes) | Additional attributes for naming | `list(string)` | `[]` | no |
 | <a name="input_comparison_operator"></a> [comparison\_operator](#input\_comparison\_operator) | Arithmetic operation to use when comparing statistic and threshold | `string` | n/a | yes |
 | <a name="input_datapoints_to_alarm"></a> [datapoints\_to\_alarm](#input\_datapoints\_to\_alarm) | Number of datapoints that must be breaching to trigger alarm | `number` | `null` | no |
-| <a name="input_delimiter"></a> [delimiter](#input\_delimiter) | Delimiter to use between name components | `string` | `"-"` | no |
 | <a name="input_dimensions"></a> [dimensions](#input\_dimensions) | Dimensions for the metric | `map(string)` | `{}` | no |
 | <a name="input_environment"></a> [environment](#input\_environment) | Environment name (dev, staging, prod) | `string` | n/a | yes |
 | <a name="input_evaluation_periods"></a> [evaluation\_periods](#input\_evaluation\_periods) | Number of periods over which data is compared to the threshold | `number` | `1` | no |
@@ -167,3 +166,7 @@ module "lambda_errors" {
 
 See [example/](example/) for a complete working example with all features.
 
+## License
+
+MIT Licensed. See [LICENSE](LICENSE) for full details.
+<!-- END_TF_DOCS -->
