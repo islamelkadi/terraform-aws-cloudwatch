@@ -194,26 +194,6 @@ module "dev_logs" {
 
 <!-- BEGIN_TF_DOCS -->
 
-## Usage
-
-```hcl
-# Basic CloudWatch Logs Example
-
-module "lambda_logs" {
-  source = "github.com/islamelkadi/terraform-aws-cloudwatch//modules/logs"
-
-  namespace   = var.namespace
-  environment = var.environment
-  name        = var.name
-  region      = var.region
-
-  log_group_name_override = var.log_group_name_override
-  retention_in_days       = var.retention_in_days
-  kms_key_id              = var.kms_key_id
-
-  tags = var.tags
-}
-```
 
 ## Requirements
 
@@ -232,7 +212,7 @@ module "lambda_logs" {
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_metadata"></a> [metadata](#module\_metadata) | github.com/islamelkadi/terraform-aws-metadata | v1.1.0 |
+| <a name="module_metadata"></a> [metadata](#module\_metadata) | github.com/islamelkadi/terraform-aws-metadata | v1.0.0 |
 
 ## Resources
 
@@ -269,7 +249,7 @@ module "lambda_logs" {
 | <a name="output_log_stream_names"></a> [log\_stream\_names](#output\_log\_stream\_names) | Names of the created log streams |
 | <a name="output_tags"></a> [tags](#output\_tags) | Tags applied to the log group |
 
-## Examples
+## License
 
-See [example/](example/) for a complete working example.
-
+MIT Licensed. See [LICENSE](../../LICENSE) for full details.
+<!-- END_TF_DOCS -->

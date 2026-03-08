@@ -34,12 +34,6 @@ variable "retention_in_days" {
   default     = 30
 }
 
-variable "kms_key_id" {
-  description = "ARN of KMS key for log encryption"
-  type        = string
-  default     = "arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012"
-}
-
 variable "tags" {
   description = "Additional tags"
   type        = map(string)

@@ -1,3 +1,7 @@
+# Primary Module Example - This demonstrates the terraform-aws-cloudwatch logs module
+# Supporting infrastructure (KMS) is defined in separate files
+# to keep this example focused on the module's core functionality.
+#
 # Basic CloudWatch Logs Example
 
 module "lambda_logs" {
@@ -10,7 +14,9 @@ module "lambda_logs" {
 
   log_group_name_override = var.log_group_name_override
   retention_in_days       = var.retention_in_days
-  kms_key_id              = var.kms_key_id
+
+  # Direct reference to kms.tf module output
+  kms_key_id = module.kms_key.key_id
 
   tags = var.tags
 }
