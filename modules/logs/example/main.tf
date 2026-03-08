@@ -14,7 +14,7 @@ module "lambda_logs" {
 
   log_group_name_override = var.log_group_name_override
   retention_in_days       = var.retention_in_days
-  
+
   # Direct reference to kms.tf module output
   kms_key_id = module.kms_key.key_id
 
